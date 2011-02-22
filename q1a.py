@@ -75,4 +75,8 @@ for line in class_map_file:
 
 sys_data = read_in_sys(output_dirname, class_map)
 print_sys(sys_data, output_dirname)
-print_acc(sys_data, class_map)
+print "\nConfusion matrix for the testing data:"
+print "row is the truth, column is the system output\n"
+testing_acc = print_acc(sys_data, class_map)
+print "\n"
+print "Testing accuracy:", testing_acc

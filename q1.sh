@@ -19,9 +19,11 @@ do
     vectors2train --trainer MaxEnt --output-classifier ${dirname}mallet.model --training-file ${dirname}train.vectors --report train:raw  > ${dirname}train_output
     # run classify with train model on test vectors
     classify --classifier ${dirname}mallet.model --testing-file ${dirname}test.vectors --report test:raw > ${dirname}test_output
-    grep "^\." <${dirname}train_output >${dirname}train_output_pared
-    grep "^\." <${dirname}test_output >${dirname}test_output_pared
-    cat ${dirname}train_output_pared ${dirname}test_output_pared >> ${dirname}sys_output
+
+    # turns out we only need sys output for test files
+    #grep "^\." <${dirname}train_output >${dirname}train_output_pared
+    grep "^\." <${dirname}test_output >${dirname}sys_output
+    #cat ${dirname}train_output_pared ${dirname}test_output_pared >> ${dirname}sys_output
 
 done <$map_file
 
