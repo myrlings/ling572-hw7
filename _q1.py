@@ -37,17 +37,19 @@ for classification in total_classes:
 class_map.close()
 #############################################################################################
 #create training and test vectors############################################################
-create_training_vectors = "info2vectors --input "+training_data+" --output "+output_dir+"/"+train_vectors
-create_test_vectors = "info2vectors --input "+test_data+" --output "+output_dir+"/"+test_vectors + " --use-pipe-from "+train_vectors
-os.popen(create_training_vectors)
-os.popen(create_test_vectors)
+
+
 #loop through classes########################################################################
 i=1
-for classification in total_classes:
+for classification in total_classes: #
 	classifier_name = str(i)+"_vs_all"
 	i+=1
-	create_classifier = "vectors2train --training-file "+train_vectors+" --trainer MaxEnt --output-classifier "+output_dir+"/"+classifier_name+" --report train:raw > "+output_dir+"/"+classifier_name+".stdout2 2>"+output_dir+"/"+classifier_name+".stderr2"
-	classify = "classify --testing-file "+test_vectors+" --classifier "+classifier_name+" --report test:raw  > "+output_dir+"/"+classifier_name+".stdout 2> "+output_dir+"/"+classifier_name+".stderr"
+	create_training_vectors = "info2vectors --input "+training_data+" --output "+classifier_name+"/"+train_vectors
+	create_test_vectors = "info2vectors --input "+test_data+" --output "+classifier_name+"/"+test_vectors + " --use-pipe-from "+classifier_name+"/"+train_vectors
+	create_classifier = "vectors2train --training-file "+classifier_name+"/"+train_vectors+" --trainer MaxEnt --output-classifier "+classifier_name+"/"+classifier_name+" --report train:raw > "+classifier_name+"/"+classifier_name+".stdout2 2>"+classifier_name+"/"+classifier_name+".stderr2"
+	classify = "classify --testing-file "+test_vectors+" --classifier "+classifier_name+" --report test:raw  > "+classifier_name+"/"+classifier_name+".stdout 2> "+classifier_name+"/"+classifier_name+".stderr"
+	os.popen(create_training_vectors)
+	os.popen(create_test_vectors)
 	os.popen(create_classifier)
 	os.popen(classify)
 
