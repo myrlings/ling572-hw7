@@ -1,0 +1,23 @@
+ output usepipe ilist pipe instance id =c22b1566609b2a13:7607e011:12e4fa39c0b:-7ffc
+ output usepipe ilist pipe instance id =c22b1566609b2a13:-2dfeeb8e:12e4fa3d79a:-7ffc
+ output usepipe ilist pipe instance id =c22b1566609b2a13:-46b648de:12e4fa412b7:-7ffc
+
+Confusion matrix for the training data:
+row is the truth, column is the system output
+
+	talk.politics.guns	talk.politics.mideast	talk.politics.misc
+talk.politics.guns	881	1	18
+talk.politics.mideast	0	888	12
+talk.politics.misc	19	35	846
+Training accuracy: 0.968518518519
+
+Confusion matrix for the testing data:
+row is the truth, column is the system output
+
+	talk.politics.guns	talk.politics.mideast	talk.politics.misc
+talk.politics.guns	82	0	18
+talk.politics.mideast	3	93	4
+talk.politics.misc	21	5	74
+
+
+Testing accuracy: 0.83
