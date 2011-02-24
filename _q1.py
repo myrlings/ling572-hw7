@@ -52,5 +52,4 @@ for classification in total_classes: #
 	os.popen(create_test_vectors)
 	os.popen(create_classifier)
 	os.popen(classify)
-
 # 
