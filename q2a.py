@@ -2,12 +2,12 @@ import sys
 from operator import itemgetter
 
 # functions
-def read_in_sys(output_dirname, class_map):
+def read_in_sys(output_dirname, class_map, filename):
     sys_data = {}
     for index in class_map:
         for other_index in class_map:
             if index != other_index:
-                sys_filename = output_dirname + "/" + index + "-vs-" + other_index + "/sys_output"
+                sys_filename = output_dirname + "/" + index + "-vs-" + other_index +"/"+ filename
                 sys_file = open(sys_filename, 'r')
                 for line in sys_file:
                     line_array = line.split()
@@ -26,6 +26,30 @@ def read_in_sys(output_dirname, class_map):
                     pos_prob_split = pos_prob.split(":")
                     sys_data[line_array[0]][class_map[index]] = float(pos_prob_split[1])
     return sys_data
+
+
+		# def read_in_sys(output_dirname, class_map, filename):
+		#     sys_data = {}
+		#     for index in class_map:
+		#         sys_filename = output_dirname + "/" + index + "-vs-all/" + filename
+		#         sys_file = open(sys_filename, 'r')
+		#         for line in sys_file:
+		#             line_array = line.split()
+		#             if not line_array[0] in sys_data:
+		#                 sys_data[line_array[0]] = {}
+		#             if line_array[1] == "1":
+		#                 # store the answer if this is it
+		#                 sys_data[line_array[0]]["goldClass"] = class_map[index]
+		#             prob1 = line_array[2]
+		#             prob2 = line_array[3]
+		#             pos_prob = ""
+		#             if prob1.startswith("-"):
+		#                 pos_prob = prob2
+		#             else:
+		#                 pos_prob = prob1
+		#             pos_prob_split = pos_prob.split(":")
+		#             sys_data[line_array[0]][class_map[index]] = float(pos_prob_split[1])
+		#     return sys_data
 
 def print_sys(sys_data, output_dirname):
     sys_file = open(output_dirname + "/final_sys_output", 'w')
@@ -75,7 +99,17 @@ for line in class_map_file:
     line_array = line.split()
     class_map[line_array[1]] = line_array[0]
 
-sys_data = read_in_sys(output_dirname, class_map)
+# training accuracy
+sys_data_train = read_in_sys(output_dirname, class_map, "train_output_pared")
+# the file this creates will get overwritten, terrible way to do it
+print_sys(sys_data_train, output_dirname + "/train_sys_output")
+print "\nConfusion matrix for the training data:"
+print "row is the truth, column is the system output\n"
+training_acc = print_acc(sys_data_train, class_map)
+print "Training accuracy:", training_acc
+
+
+sys_data = read_in_sys(output_dirname, class_map, "sys_output")
 print_sys(sys_data, output_dirname)
 print "\nConfusion matrix for the testing data:"
 print "row is the truth, column is the system output\n"
