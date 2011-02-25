@@ -52,7 +52,7 @@ def read_in_sys(output_dirname, class_map, filename):
 		#     return sys_data
 
 def print_sys(sys_data, output_dirname):
-    sys_file = open(output_dirname + "/final_sys_output", 'w')
+    sys_file = open(output_dirname, 'w')
     for instance in sys_data:
         sys_file.write(instance + " ")
         sys_file.write(sys_data[instance]["goldClass"] + " ")
@@ -110,7 +110,7 @@ print "Training accuracy:", training_acc
 
 
 sys_data = read_in_sys(output_dirname, class_map, "sys_output")
-print_sys(sys_data, output_dirname)
+print_sys(sys_data, output_dirname+"/final_sys_output")
 print "\nConfusion matrix for the testing data:"
 print "row is the truth, column is the system output\n"
 testing_acc = print_acc(sys_data, class_map)

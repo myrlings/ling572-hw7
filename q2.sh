@@ -19,7 +19,6 @@ do
         index2=$1
         if [ "$index" != "$index2" ] ; then
 		        dirname=${output_dir}/${index}-vs-${index2}/
-						echo "dirname = " ${dirname}
 		        test_file=${dirname}test
 		        train_file=${dirname}train
 		        info2vectors --input $train_file --output ${dirname}train.vectors
@@ -34,7 +33,7 @@ do
 		    		grep "^\." <${dirname}train_output >${dirname}train_output_pared
 		        grep "^\." <${dirname}test_output >${dirname}sys_output
 		        #cat ${dirname}train_output_pared ${dirname}test_output_pared >> ${dirname}sys_output
-						python q2a.py $output_dir
 		   fi
     done <$map_file
+		python q2a.py $output_dir
 done <$map_file
