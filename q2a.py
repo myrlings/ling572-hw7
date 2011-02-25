@@ -25,7 +25,8 @@ def read_in_sys(output_dirname, class_map, filename):
                     else:
                         pos_prob = prob1
                     pos_prob_split = pos_prob.split(":")
-                    sys_data[line_array[0]][class_map[index]] = float(pos_prob_split[1])
+                    index_string = index + ":" + other_index
+                    sys_data[line_array[0]][index_string] = float(pos_prob_split[1])
     return sys_data
 
 
@@ -52,7 +53,7 @@ def read_in_sys(output_dirname, class_map, filename):
 		#             sys_data[line_array[0]][class_map[index]] = float(pos_prob_split[1])
 		#     return sys_data
 
-def print_sys(sys_data, output_dirname):
+def print_sys(sys_data, output_dirname, class_map):
     sys_file = open(output_dirname, 'w')
     for instance in sys_data:
         #print sys_file
@@ -65,6 +66,8 @@ def print_sys(sys_data, output_dirname):
         sorted_votes = sorted(sys_data[instance].iteritems()\
         , key=itemgetter(1), reverse=True)
         temp2 = sorted_votes[0][0]
+        temp2_class = class_map[temp2[0]]
+        sys_file.write(temp2_class + " ")
         for tup in sorted_votes:
             sys_file.write(tup[0] + " ")
             sys_file.write(str(tup[1]) + " ")
