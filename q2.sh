@@ -33,7 +33,7 @@ do
 		    		grep "^\." <${dirname}train_output >${dirname}train_output_pared
 		        grep "^\." <${dirname}test_output >${dirname}sys_output
 		        #cat ${dirname}train_output_pared ${dirname}test_output_pared >> ${dirname}sys_output
+						python q2a.py $dirname
 		   fi
     done <$map_file
-		python q2a.py $output_dir
 done <$map_file

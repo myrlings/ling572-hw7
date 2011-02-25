@@ -8,6 +8,7 @@ def read_in_sys(output_dirname, class_map, filename):
         for other_index in class_map:
             if index != other_index:
                 sys_filename = output_dirname + "/" + index + "-vs-" + other_index +"/"+ filename
+                sys_filename = output_dirname +"/"+ filename
                 sys_file = open(sys_filename, 'r')
                 for line in sys_file:
                     line_array = line.split()
@@ -93,7 +94,10 @@ def print_acc(sys_data, class_map):
 # main
 output_dirname = sys.argv[1]
 
-class_map_file = open(output_dirname + "/class_map", 'r')
+#bad code alert!
+root_dirname = output_dirname.split("/")[0]+"/"
+
+class_map_file = open(root_dirname + "class_map", 'r')
 class_map = {}
 for line in class_map_file:
     line_array = line.split()
