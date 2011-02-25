@@ -7,8 +7,8 @@ def read_in_sys(output_dirname, class_map, filename):
     for index in class_map:
         for other_index in class_map:
             if index != other_index:
-                # sys_filename = output_dirname  + index + "-vs-" + other_index +"/"+ filename
-                sys_filename = output_dirname + filename
+                sys_filename = output_dirname  + index + "-vs-" + other_index +"/"+ filename
+                #sys_filename = output_dirname + filename
                 sys_file = open(sys_filename, 'r')
                 for line in sys_file:
                     line_array = line.split()
@@ -55,10 +55,10 @@ def read_in_sys(output_dirname, class_map, filename):
 def print_sys(sys_data, output_dirname):
     sys_file = open(output_dirname, 'w')
     for instance in sys_data:
-        print sys_file
-        print instance
-        print "sys_data[instance]"
-        print sys_data[instance]
+        #print sys_file
+        #print instance
+        #print "sys_data[instance]"
+        #print sys_data[instance]
         sys_file.write(instance + " ")
         sys_file.write(sys_data[instance]["goldClass"] + " ")
         temp = sys_data[instance].pop('goldClass')
@@ -99,7 +99,8 @@ def print_acc(sys_data, class_map):
 output_dirname = sys.argv[1]
 
 #bad code alert!
-root_dirname = output_dirname.split("/")[0]
+#root_dirname = output_dirname.split("/")[0]
+root_dirname = output_dirname
 
 class_map_file = open(root_dirname + "/class_map", 'r')
 class_map = {}
