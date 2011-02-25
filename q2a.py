@@ -55,6 +55,8 @@ def read_in_sys(output_dirname, class_map, filename):
 def print_sys(sys_data, output_dirname):
     sys_file = open(output_dirname, 'w')
     for instance in sys_data:
+        print sys_file
+        print instance
         print "sys_data[instance]"
         print sys_data[instance]
         sys_file.write(instance + " ")
