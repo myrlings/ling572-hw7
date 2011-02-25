@@ -21,7 +21,7 @@ do
     classify --classifier ${dirname}mallet.model --testing-file ${dirname}test.vectors --report test:raw > ${dirname}test_output
 
     # turns out we only need sys output for test files
-    #grep "^\." <${dirname}train_output >${dirname}train_output_pared
+    grep "^\." <${dirname}train_output >${dirname}train_output_pared
     grep "^\." <${dirname}test_output >${dirname}sys_output
     #cat ${dirname}train_output_pared ${dirname}test_output_pared >> ${dirname}sys_output
 
